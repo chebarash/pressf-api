@@ -1,0 +1,60 @@
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+
+# Compiled class files
+target/
+build/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# IDEs and editors
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.sublime*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+*.env.local
+
+# Maven
+.mvn/
+!**/src/main/**/application.properties
+!**/src/main/**/application.yml
+
+# Gradle
+.gradle/
+build/
+!gradle-wrapper.jar
+
+# Node (if using frontend assets)
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Coverage reports
+coverage/
+*.lcov
+*.exec
+jacoco.exec
+
+# Spring Boot devtools
+.spring-boot-devtools.properties
+*.properties
