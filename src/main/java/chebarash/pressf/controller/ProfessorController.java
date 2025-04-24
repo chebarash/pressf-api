@@ -1,5 +1,7 @@
 package chebarash.pressf.controller;
 
+import chebarash.pressf.dto.GetProfessorDTO;
+import chebarash.pressf.dto.GetProfessorsDTO;
 import chebarash.pressf.model.Course;
 import chebarash.pressf.model.Feedback;
 import chebarash.pressf.model.Professor;
@@ -9,9 +11,7 @@ import chebarash.pressf.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/professors")
@@ -30,23 +30,17 @@ public class ProfessorController {
     }
 
     @GetMapping
-    public Map<String, Object> all() {
+    public GetProfessorsDTO all() {
         List<Professor> professors = service.getAll();
         List<Course> courses = courseService.getAll();
-        Map<String, Object> result = new HashMap<>();
-        result.put("professors", professors);
-        result.put("courses", courses);
-        return result;
+        return new GetProfessorsDTO(professors, courses);
     }
 
     @GetMapping("/{id}")
-    public Map<String, Object> getById(@PathVariable String id) {
+    public GetProfessorDTO getById(@PathVariable String id) {
         Professor professor = service.getById(id);
         List<Feedback> feedbacks = feedbackService.getAllByProfessor(id);
-        Map<String, Object> result = new HashMap<>();
-        result.put("professor", professor);
-        result.put("feedbacks", feedbacks);
-        return result;
+        return new GetProfessorDTO(professor, feedbacks);
     }
 
     @PostMapping
