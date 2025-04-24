@@ -29,9 +29,6 @@ public class Professor {
     @Transient
     private List<Course> courses;
 
-    @Transient
-    private List<Feedback> feedbacks;
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -121,13 +118,5 @@ public class Professor {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-    }
-
-    public List<Feedback> getFeedbacks() {
-        return feedbacks;
-    }
-
-    public void setFeedbacks(List<Feedback> feedbacks) {
-        this.feedbacks = feedbacks;
     }
 }

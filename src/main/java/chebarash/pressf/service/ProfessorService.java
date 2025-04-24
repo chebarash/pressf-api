@@ -1,10 +1,7 @@
 package chebarash.pressf.service;
 
 import chebarash.pressf.model.Course;
-import chebarash.pressf.model.Feedback;
 import chebarash.pressf.model.Professor;
-import chebarash.pressf.repository.CourseRepository;
-import chebarash.pressf.repository.FeedbackRepository;
 import chebarash.pressf.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +14,10 @@ public class ProfessorService {
     private ProfessorRepository repository;
 
     @Autowired
-    private CourseRepository courseRepository;
+    private CourseService courseService;
 
     @Autowired
-    private FeedbackRepository feedbackRepository;
+    private FeedbackService feedbackService;
 
     public ProfessorService(ProfessorRepository repository) {
         this.repository = repository;
@@ -29,7 +26,7 @@ public class ProfessorService {
     public List<Professor> getAll() {
         List<Professor> professors = repository.findAll();
         for (Professor professor : professors) {
-            List<Course> courses = courseRepository.findAllById(professor.getCoursesIds());
+            List<Course> courses = courseService.getAllById(professor.getCoursesIds());
             professor.setCourses(courses);
         }
         return professors;
@@ -38,9 +35,7 @@ public class ProfessorService {
     public Professor getById(String id) {
         Professor professor = repository.findById(id).orElse(null);
         if (professor == null) return null;
-        List<Course> courses = courseRepository.findAllById(professor.getCoursesIds());
-        List<Feedback> feedbacks = feedbackRepository.findAllByProfessor(id);
-        System.out.println(feedbacks);
+        List<Course> courses = courseService.getAllById(professor.getCoursesIds());
         professor.setCourses(courses);
         return professor;
     }

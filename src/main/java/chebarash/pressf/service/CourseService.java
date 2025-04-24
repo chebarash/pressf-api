@@ -18,6 +18,10 @@ public class CourseService {
         return repository.findAll();
     }
 
+    public List<Course> getAllById(List<String> ids) {
+        return repository.findAllById(ids);
+    }
+
     public Course create(Course course) {
         return repository.save(course);
     }
